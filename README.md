@@ -60,7 +60,7 @@ class ExampleController extends AbstractController
         }
         
         return $this->render('example.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }
