@@ -6,7 +6,9 @@
 
     <services>
         <defaults public="false" autoconfigure="true" autowire="true"/>
-        <service id="Ansien\AttributeFormBundle\Form\AttributeFormBuilder" public="true">
+        <service id="Ansien\AttributeFormBundle\Form\AttributeFormBuilderInterface"
+                 class="Ansien\AttributeFormBundle\Form\AttributeFormBuilder"
+                 public="true">
             <argument type="service" id="form.factory"/>
         </service>
     </services>

@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class AttributeFormBuilder
+class AttributeFormBuilder implements AttributeFormBuilderInterface
 {
     private FormFactoryInterface $formFactory;
 
@@ -26,8 +26,7 @@ class AttributeFormBuilder
         if ($name === null) {
             $parts = explode('\\', get_class($data));
             $class = end($parts);
-            $snake = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $class));
-            $name = str_replace('_data', '', $snake);
+            $name = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $class));
         }
 
         return $this->formFactory->createNamed(

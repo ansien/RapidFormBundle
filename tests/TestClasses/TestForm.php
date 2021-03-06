@@ -12,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContext;
 
 #[Form]
 class TestForm
@@ -28,13 +27,7 @@ class TestForm
         'choice_label' => [CallbackType::FUNCTION, 'getFromCurrencyLabel'],
     ])]
     #[Assert\NotBlank]
-    public ?string $fromCurrency = null;
-
-    #[FormField(ChoiceType::class, [
-        'choices' => [CallbackType::VALUE, 'enabledCurrencies'],
-    ])]
-    #[Assert\NotBlank]
-    public ?string $toCurrency = null;
+    public ?string $currency = null;
 
     #[FormField(NumberType::class, [
         'scale' => 4,
@@ -49,14 +42,7 @@ class TestForm
         'input' => 'datetime_immutable',
     ])]
     #[Assert\NotBlank]
-    public ?DateTimeImmutable $validFrom = null;
-
-    #[FormField(DateType::class, [
-        'widget' => 'single_text',
-        'input' => 'datetime_immutable',
-    ])]
-    #[Assert\NotBlank]
-    public ?DateTimeImmutable $validTo = null;
+    public ?DateTimeImmutable $date = null;
 
     // endregion
 
@@ -69,22 +55,6 @@ class TestForm
     public function getFromCurrencyLabel(): callable
     {
         return fn ($value) => $value . ' + TEST';
-    }
-
-    #[Assert\Callback]
-    public function validate(ExecutionContext $context): void
-    {
-        $data = $context->getObject();
-        if (!($data instanceof self)) {
-            return;
-        }
-
-        if ($data->fromCurrency === $data->toCurrency) {
-            $context
-                ->buildViolation('currency_rate.error.duplicate')
-                ->atPath('fromCurrency')
-                ->addViolation();
-        }
     }
 
     public function getExampleValue(): string
