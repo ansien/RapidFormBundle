@@ -25,9 +25,36 @@ composer require ansien/attribute-form-bundle
 ```
 
 ## Usage
-See `./examples` for form examples.
 
-Controller:
+#### Form
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Form;
+
+use Ansien\AttributeFormBundle\Attribute\Form;
+use Ansien\AttributeFormBundle\Attribute\FormField;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints as Assert;
+
+#[Form]
+class ExampleForm
+{
+    #[FormField(TextType::class, [
+        'required' => true,
+    ])]
+    #[Assert\NotBlank]
+    public ?string $name = null;
+
+    #[FormField(TextType::class)]
+    public ?string $description = null;
+}
+```
+
+#### Controller
+
 ```php
 <?php
 
@@ -36,6 +63,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Ansien\AttributeFormBundle\Form\AttributeFormBuilderInterface;
+use App\Form\ExampleForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,7 +84,7 @@ class ExampleController extends AbstractController
         $form = $this->formBuilder->create($data)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            [...]
+            // Do something with $data
         }
         
         return $this->render('example.html.twig', [
@@ -65,6 +93,8 @@ class ExampleController extends AbstractController
     }
 }
 ```
+
+See `./examples` for more examples.
 
 ## Changelog
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
@@ -81,8 +111,9 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Credits
 - [Andries](https://github.com/ansien)
-- [Albert](https://github.com/abbert) (initial creator of the AnnotatedFormBundle)
-- [schvoy](https://github.com/schvoy) (for his work on [form-annotation-bundle](https://github.com/eightmarq/form-annotation-bundle))
+- [Albert](https://github.com/abbert) (for his work on the deprecated annotated-form-bundle)
+- [schvoy](https://github.com/schvoy) (for his work on the [form-annotation-bundle](https://github.com/eightmarq/form-annotation-bundle))
+- [Bob](https://github.com/madebybob) and [Jon](https://github.com/jonmldr) (for their repository template)
 - [All Contributors](../../contributors)
 
 ## License
