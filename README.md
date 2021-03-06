@@ -25,7 +25,46 @@ composer require ansien/attribute-form-bundle
 ```
 
 ## Usage
-See `./examples`
+See `./examples` for form examples.
+
+Controller:
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller;
+
+use Ansien\AttributeFormBundle\Form\AttributeFormBuilder;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class ExampleController extends AbstractController
+{
+    private AttributeFormBuilder $formBuilder;
+
+    public function __construct(AttributeFormBuilder $formBuilder) {
+        $this->formBuilder = $formBuilder;
+    }
+
+    #[Route('/test')]
+    public function __invoke(Request $request): Response
+    {
+        $data = new ExampleForm();
+        $form = $this->formBuilder->create($data)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            [...]
+        }
+        
+        return $this->render('example.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+}
+```
 
 ## Changelog
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
