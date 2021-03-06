@@ -49,7 +49,7 @@ class ExampleController extends AbstractController
         $this->formBuilder = $formBuilder;
     }
 
-    #[Route('/test')]
+    #[Route(path: '/example', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $data = new ExampleForm();
