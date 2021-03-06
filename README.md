@@ -39,7 +39,7 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 ## Credits
 - [Andries](https://github.com/ansien)
 - [Albert](https://github.com/abbert) (initial creator of the AnnotatedFormBundle)
-- [schvoy](https://github.com/schvoy) (for his work on form-annotation-bundle)
+- [schvoy](https://github.com/schvoy) (for his work on [form-annotation-bundle](https://github.com/eightmarq/form-annotation-bundle))
 - [All Contributors](../../contributors)
 
 ## License
