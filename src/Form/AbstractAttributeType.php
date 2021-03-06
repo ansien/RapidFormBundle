@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ansien\AttributeFormBundle\Form;
 
 use Ansien\AttributeFormBundle\Attribute\AttributeFormField;
-use Ansien\AttributeFormBundle\Attribute\Form;
 use Cocur\Slugify\Slugify;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
@@ -39,18 +38,7 @@ class AbstractAttributeType extends AbstractType
 
     protected function applyClassAnnotations(array $classAnnotations, FormBuilderInterface $builder): void
     {
-//        if ($action = $classAnnotation->action) {
-//            $builder->setAction($action);
-//        }
-//
-//        if ($method = $classAnnotation->method) {
-//            $builder->setMethod($method);
-//        }
-
-//        if ($submit = $classAnnotation->submit) {
-//            $builder->add('_submit', SubmitType::class, ['label' => $submit]);
-//        $builder->add('_submit', SubmitType::class, ['label' => 'yo']);
-//        }
+        // @TODO
     }
 
     protected function addField(string $fieldName, AttributeFormField $propertyAnnotation, FormBuilderInterface $builder): void
