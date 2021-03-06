@@ -75,6 +75,10 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 ## Supporters
 [![Stargazers repo roster for @ansien/attribute-form-bundle](https://reporoster.com/stars/ansien/attribute-form-bundle)](https://github.com/ansien/attribute-form-bundle/stargazers)
 
+## TODO
+- Add more tests/examples
+- Add options to configure form root
+
 ## Credits
 - [Andries](https://github.com/ansien)
 - [Albert](https://github.com/abbert) (initial creator of the AnnotatedFormBundle)
