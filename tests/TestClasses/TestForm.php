@@ -18,13 +18,13 @@ class TestForm
 {
     private string $exampleValue;
 
-    public array $enabledCurrencies;
+    public array $enabledCurrencyChoices;
 
     // region Form fields
 
     #[FormField(ChoiceType::class, [
-        'choices' => [CallbackType::VALUE, 'enabledCurrencies'],
-        'choice_label' => [CallbackType::FUNCTION, 'getFromCurrencyLabel'],
+        'choices' => [CallbackType::VALUE, 'enabledCurrencyChoices'],
+        'choice_label' => [CallbackType::FUNCTION, 'getCurrencyLabelCb'],
     ])]
     #[Assert\NotBlank]
     public ?string $currency = null;
@@ -46,15 +46,15 @@ class TestForm
 
     // endregion
 
-    public function __construct(string $exampleValue, array $enabledCurrencies)
+    public function __construct(string $exampleValue, array $enabledCurrencyChoices)
     {
         $this->exampleValue = $exampleValue;
-        $this->enabledCurrencies = $enabledCurrencies;
+        $this->enabledCurrencyChoices = $enabledCurrencyChoices;
     }
 
-    public function getFromCurrencyLabel(): callable
+    public function getCurrencyLabelCb(): callable
     {
-        return fn ($value) => $value . ' + TEST';
+        return fn (string $value) => $value . ' + TEST';
     }
 
     public function getExampleValue(): string
