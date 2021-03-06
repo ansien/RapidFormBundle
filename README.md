@@ -1,6 +1,6 @@
 # AttributeFormBundle - Quickly create Symfony forms
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/ansien/attribute-form-bundle/Tests/master?label=Tests&logo=Tests)
+[comment]: <> (![GitHub Workflow Status &#40;branch&#41;]&#40;https://img.shields.io/github/workflow/status/ansien/attribute-form-bundle/Tests/master?label=Tests&logo=Tests&#41;)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ansien/attribute-form-bundle.svg)](https://packagist.org/packages/ansien/attribute-form-bundle)
 [![Total Downloads](https://img.shields.io/packagist/dt/ansien/attribute-form-bundle.svg)](https://packagist.org/packages/ansien/attribute-form-bundle)
 ![GitHub](https://img.shields.io/github/license/ansien/attribute-form-bundle)
