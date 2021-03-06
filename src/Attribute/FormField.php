@@ -11,7 +11,7 @@ class FormField
 {
     public function __construct(
         public string $type,
-        public array $options,
+        public array $options = [],
     ) {
     }
 }
