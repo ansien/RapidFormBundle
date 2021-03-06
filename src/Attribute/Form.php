@@ -7,6 +7,6 @@ namespace Ansien\AttributeFormBundle\Attribute;
 use Attribute;
 
 #[Attribute]
-class AttributeForm
+class Form
 {
 }

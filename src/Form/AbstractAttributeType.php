@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ansien\AttributeFormBundle\Form;
 
-use Ansien\AttributeFormBundle\Attribute\AttributeFormField;
+use Ansien\AttributeFormBundle\Attribute\FormField;
 use Cocur\Slugify\Slugify;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
@@ -28,7 +28,7 @@ class AbstractAttributeType extends AbstractType
         foreach ($properties ?? [] as $fieldName => $propertyAnnotations) {
             foreach ($propertyAnnotations as $propertyAnnotation) {
                 switch (get_class($propertyAnnotation)) {
-                    case AttributeFormField::class:
+                    case FormField::class:
                         $this->addField($fieldName, $propertyAnnotation, $builder);
                         break;
                 }
@@ -41,7 +41,7 @@ class AbstractAttributeType extends AbstractType
         // @TODO
     }
 
-    protected function addField(string $fieldName, AttributeFormField $propertyAnnotation, FormBuilderInterface $builder): void
+    protected function addField(string $fieldName, FormField $propertyAnnotation, FormBuilderInterface $builder): void
     {
         $options = $this->transformOptions($builder->getData(), $propertyAnnotation->options);
 
@@ -88,7 +88,7 @@ class AbstractAttributeType extends AbstractType
         $propertyAnnotations = [];
         foreach ($reflectionClass->getProperties() as $property) {
             $propertyName = $property->getName();
-            $attributes = $property->getAttributes(AttributeFormField::class);
+            $attributes = $property->getAttributes(FormField::class);
 
             foreach ($attributes as $attribute) {
                 $propertyAnnotations[$propertyName][] = $attribute->newInstance();

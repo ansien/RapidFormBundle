@@ -7,7 +7,7 @@ namespace Ansien\AttributeFormBundle\Attribute;
 use Attribute;
 
 #[Attribute]
-class AttributeFormField
+class FormField
 {
     public function __construct(
         public string $type,

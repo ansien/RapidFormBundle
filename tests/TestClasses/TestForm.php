@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ansien\AttributeFormBundle\Tests\TestClasses;
 
-use Ansien\AttributeFormBundle\Attribute\AttributeForm;
-use Ansien\AttributeFormBundle\Attribute\AttributeFormField;
+use Ansien\AttributeFormBundle\Attribute\Form;
+use Ansien\AttributeFormBundle\Attribute\FormField;
 use Ansien\AttributeFormBundle\Form\CallbackType;
 use DateTimeImmutable;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContext;
 
-#[AttributeForm]
+#[Form]
 class TestForm
 {
     private string $exampleValue;
@@ -23,20 +23,20 @@ class TestForm
 
     // region Form fields
 
-    #[AttributeFormField(ChoiceType::class, [
+    #[FormField(ChoiceType::class, [
         'choices' => [CallbackType::VALUE, 'enabledCurrencies'],
         'choice_label' => [CallbackType::FUNCTION, 'getFromCurrencyLabel'],
     ])]
     #[Assert\NotBlank]
     public ?string $fromCurrency = null;
 
-    #[AttributeFormField(ChoiceType::class, [
+    #[FormField(ChoiceType::class, [
         'choices' => [CallbackType::VALUE, 'enabledCurrencies'],
     ])]
     #[Assert\NotBlank]
     public ?string $toCurrency = null;
 
-    #[AttributeFormField(NumberType::class, [
+    #[FormField(NumberType::class, [
         'scale' => 4,
         'input' => 'string',
     ])]
@@ -44,14 +44,14 @@ class TestForm
     #[Assert\Range(min: -1000000, max: 1000000)]
     public ?string $rate = null;
 
-    #[AttributeFormField(DateType::class, [
+    #[FormField(DateType::class, [
         'widget' => 'single_text',
         'input' => 'datetime_immutable',
     ])]
     #[Assert\NotBlank]
     public ?DateTimeImmutable $validFrom = null;
 
-    #[AttributeFormField(DateType::class, [
+    #[FormField(DateType::class, [
         'widget' => 'single_text',
         'input' => 'datetime_immutable',
     ])]

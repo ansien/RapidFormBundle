@@ -1,5 +1,0 @@
-services:
-    Ansien\AttributeFormBundle\Form\AttributeFormBuilder:
-      public: true
-      arguments:
-        [ '@form.factory' ]
