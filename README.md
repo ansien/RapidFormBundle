@@ -18,7 +18,7 @@ This bundle will significantly speed up the creation of forms in your Symfony ap
 attributes you can quickly make forms and you won't have to maintain two different files anymore.
 
 ## Installation
-You can install the package via composer:
+You can install the package via Composer:
 
 ```bash
 composer require ansien/attribute-form-bundle
