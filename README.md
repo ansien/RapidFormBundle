@@ -7,7 +7,7 @@
 
 ![Example](https://raw.githubusercontent.com/ansien/attribute-form-bundle/master/.github/readme_example.png)
 
-This goal of this bundle is to help you create forms in the Symfony framework quickly using PHP 8 attributes on your DTO.
+This goal of this bundle is to help you create forms in the Symfony framework quickly using PHP 8 attributes on your [DTO](https://blog.martinhujer.cz/symfony-forms-with-request-objects/).
 
 #### The problem
 Making forms in Symfony is fairly simple. But once you start using DTO's there will always be two classes you'll have to maintain: 
