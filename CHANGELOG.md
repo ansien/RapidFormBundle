@@ -3,7 +3,7 @@
 All notable changes to `rapid-form-bundle` will be documented in this file
 
 ## 1.0.5 - 2020-03-07
-- Fix services.xml
+- Fixed mistake in services.xml
 
 ## 1.0.4 - 2020-03-07
 - Renamed bundle
