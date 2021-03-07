@@ -1,9 +1,9 @@
 {
-    "name": "ansien/attribute-form-bundle",
+    "name": "ansien/rapid-form-bundle",
     "description": "A bundle that will help you quickly create forms for your Symfony application",
     "keywords": [
         "ansien",
-        "attribute-form-bundle",
+        "rapid-form-bundle",
         "symfony",
         "bundle",
         "form"
@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ansien\\AttributeFormBundle\\": "src"
+            "Ansien\\RapidFormBundle\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ansien\\AttributeFormBundle\\Tests\\": "tests"
+            "Ansien\\RapidFormBundle\\Tests\\": "tests"
         }
     },
     "scripts": {

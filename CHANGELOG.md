@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `attribute-form-bundle` will be documented in this file
+All notable changes to `rapid-form-bundle` will be documented in this file
 
 ## 1.0.3 - 2020-03-07
 - Remove slugify dependency

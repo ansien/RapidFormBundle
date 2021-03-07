@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Tests\TestClasses;
+namespace Ansien\RapidFormBundle\Tests\TestClasses;
 
 class InvalidForm
 {

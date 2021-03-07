@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Form;
+namespace Ansien\RapidFormBundle\Form;
 
 class CallbackType
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Ansien\AttributeFormBundle;
+namespace Ansien\RapidFormBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AttributeFormBundle extends Bundle
+class RapidFormBundle extends Bundle
 {
 }

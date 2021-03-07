@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Examples;
+namespace Ansien\RapidFormBundle\Examples;
 
-use Ansien\AttributeFormBundle\Attribute\Form;
-use Ansien\AttributeFormBundle\Attribute\FormField;
-use Ansien\AttributeFormBundle\Form\CallbackType;
+use Ansien\RapidFormBundle\Attribute\Form;
+use Ansien\RapidFormBundle\Attribute\FormField;
+use Ansien\RapidFormBundle\Form\CallbackType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints as Assert;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Attribute;
+namespace Ansien\RapidFormBundle\Attribute;
 
 use Attribute;
 

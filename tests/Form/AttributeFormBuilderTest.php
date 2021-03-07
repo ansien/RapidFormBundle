@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Tests\Form;
+namespace Ansien\RapidFormBundle\Tests\Form;
 
-use Ansien\AttributeFormBundle\Form\AttributeFormBuilder;
-use Ansien\AttributeFormBundle\Tests\TestClasses\FormAttributesForm;
-use Ansien\AttributeFormBundle\Tests\TestClasses\InvalidForm;
-use Ansien\AttributeFormBundle\Tests\TestClasses\TestForm;
+use Ansien\RapidFormBundle\Form\AttributeFormBuilder;
+use Ansien\RapidFormBundle\Tests\TestClasses\FormAttributesForm;
+use Ansien\RapidFormBundle\Tests\TestClasses\InvalidForm;
+use Ansien\RapidFormBundle\Tests\TestClasses\TestForm;
 use Closure;
 use InvalidArgumentException;
 use Symfony\Component\Form\Form;

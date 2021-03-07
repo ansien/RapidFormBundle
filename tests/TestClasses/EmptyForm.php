@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Tests\TestClasses;
+namespace Ansien\RapidFormBundle\Tests\TestClasses;
 
-use Ansien\AttributeFormBundle\Attribute\Form;
+use Ansien\RapidFormBundle\Attribute\Form;
 
 #[Form]
 class EmptyForm

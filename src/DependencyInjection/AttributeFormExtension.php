@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\DependencyInjection;
+namespace Ansien\RapidFormBundle\DependencyInjection;
 
 use Exception;
 use Symfony\Component\Config\FileLocator;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Form;
+namespace Ansien\RapidFormBundle\Form;
 
-use Ansien\AttributeFormBundle\Attribute\Form;
-use Ansien\AttributeFormBundle\Util\NamingUtils;
+use Ansien\RapidFormBundle\Attribute\Form;
+use Ansien\RapidFormBundle\Util\NamingUtils;
 use InvalidArgumentException;
 use ReflectionClass;
 use Symfony\Component\Form\FormFactoryInterface;

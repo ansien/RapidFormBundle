@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Tests\Util;
+namespace Ansien\RapidFormBundle\Tests\Util;
 
-use Ansien\AttributeFormBundle\Tests\TestClasses\EmptyForm;
-use Ansien\AttributeFormBundle\Util\NamingUtils;
+use Ansien\RapidFormBundle\Tests\TestClasses\EmptyForm;
+use Ansien\RapidFormBundle\Util\NamingUtils;
 use PHPUnit\Framework\TestCase;
 
 class NamingUtilsTest extends TestCase

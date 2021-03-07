@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Examples;
+namespace Ansien\RapidFormBundle\Examples;
 
-use Ansien\AttributeFormBundle\Attribute\Form;
-use Ansien\AttributeFormBundle\Attribute\FormField;
+use Ansien\RapidFormBundle\Attribute\Form;
+use Ansien\RapidFormBundle\Attribute\FormField;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints as Assert;
 

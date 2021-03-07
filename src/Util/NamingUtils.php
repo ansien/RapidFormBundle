@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ansien\AttributeFormBundle\Util;
+namespace Ansien\RapidFormBundle\Util;
 
 class NamingUtils
 {
