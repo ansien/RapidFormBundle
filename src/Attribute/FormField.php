@@ -6,7 +6,7 @@ namespace Ansien\AttributeFormBundle\Attribute;
 
 use Attribute;
 
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class FormField
 {
     public function __construct(

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Ansien\AttributeFormBundle\Form;
 
+use Ansien\AttributeFormBundle\Attribute\Form;
 use Ansien\AttributeFormBundle\Attribute\FormField;
-use Cocur\Slugify\Slugify;
+use Ansien\AttributeFormBundle\Util\NamingUtils;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class AbstractAttributeType extends AbstractType
@@ -36,26 +38,44 @@ class AbstractAttributeType extends AbstractType
         }
     }
 
-    protected function applyClassAnnotations(array $classAnnotations, FormBuilderInterface $builder): void
+    protected function applyClassAnnotations(Form $formAttribute, FormBuilderInterface $builder): void
     {
-        // @TODO
+        if ($action = $formAttribute->action) {
+            $builder->setAction($action);
+        }
+
+        if ($method = $formAttribute->method) {
+            $builder->setMethod($method);
+        }
+
+        if ($disabled = $formAttribute->disabled) {
+            $builder->setDisabled($disabled);
+        }
+
+        if ($attributes = $formAttribute->attributes) {
+            $builder->setAttributes($attributes);
+        }
+
+        if ($submit = $formAttribute->submit) {
+            $builder->add('_submit', SubmitType::class, ['label' => $submit]);
+        }
     }
 
-    protected function addField(string $fieldName, FormField $propertyAnnotation, FormBuilderInterface $builder): void
+    protected function addField(string $fieldName, FormField $fieldAttribute, FormBuilderInterface $builder): void
     {
-        $options = $this->transformOptions($builder->getData(), $propertyAnnotation->options);
+        $options = $this->transformOptions($builder->getData(), $fieldAttribute->options);
 
         if (!isset($options['label'])) {
             $options['label'] = sprintf(
                 '%s.%s',
-                self::getSlugify()->slugify($builder->getName()),
-                self::getSlugify()->slugify($fieldName)
+                NamingUtils::stringToSnake($builder->getName()),
+                NamingUtils::stringToSnake($fieldName),
             );
         }
 
         $builder->add(
             $fieldName,
-            $propertyAnnotation->type,
+            $fieldAttribute->type,
             $options
         );
     }
@@ -96,19 +116,8 @@ class AbstractAttributeType extends AbstractType
         }
 
         return [
-            'class' => $reflectionClass->getAttributes(Form::class),
+            'class' => $reflectionClass->getAttributes(Form::class)[0]->newInstance(),
             'properties' => $propertyAnnotations,
         ];
-    }
-
-    protected static function getSlugify(): Slugify
-    {
-        return new Slugify(
-            [
-                'regexp' => '/(?<=[[:^upper:]])(?=[[:upper:]])/',
-                'separator' => '_',
-                'lowercase_after_regexp' => true,
-            ]
-        );
     }
 }

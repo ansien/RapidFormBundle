@@ -2,6 +2,12 @@
 
 All notable changes to `attribute-form-bundle` will be documented in this file
 
+## 1.0.3 - 2020-03-07
+- Remove slugify dependency
+- Removed some unnecessary checks and improved builder
+- Added attribute targets
+- Added ability to modify form root options
+
 ## 1.0.2 - 2020-03-06
 - Improved tests and made builder use interface.
 

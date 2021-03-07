@@ -8,5 +8,5 @@ use Symfony\Component\Form\FormInterface;
 
 interface AttributeFormBuilderInterface
 {
-    public function create(mixed $data, array $options = [], ?string $name = null): FormInterface;
+    public function create(object $data, array $options = [], ?string $name = null): FormInterface;
 }

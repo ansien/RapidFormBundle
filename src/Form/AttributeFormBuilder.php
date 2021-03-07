@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Ansien\AttributeFormBundle\Form;
 
+use Ansien\AttributeFormBundle\Attribute\Form;
+use Ansien\AttributeFormBundle\Util\NamingUtils;
 use InvalidArgumentException;
+use ReflectionClass;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -17,16 +20,16 @@ class AttributeFormBuilder implements AttributeFormBuilderInterface
         $this->formFactory = $formFactory;
     }
 
-    public function create(mixed $data, array $options = [], ?string $name = null): FormInterface
+    public function create(object $data, array $options = [], ?string $name = null): FormInterface
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException('Data should be an object');
+        $reflectedForm = new ReflectionClass($data);
+
+        if (empty($reflectedForm->getAttributes(Form::class))) {
+            throw new InvalidArgumentException(sprintf('Supplied data object does not use the required %s attribute.', Form::class));
         }
 
         if ($name === null) {
-            $parts = explode('\\', get_class($data));
-            $class = end($parts);
-            $name = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $class));
+            $name = NamingUtils::classToSnake($data);
         }
 
         return $this->formFactory->createNamed(
