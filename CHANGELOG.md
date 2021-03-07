@@ -2,6 +2,9 @@
 
 All notable changes to `rapid-form-bundle` will be documented in this file
 
+## 1.0.4 - 2020-03-07
+- Renamed bundle
+
 ## 1.0.3 - 2020-03-07
 - Remove slugify dependency
 - Removed some unnecessary checks and improved builder
