@@ -15,7 +15,7 @@ your DTO and your Symfony form type. This is not ideal because it creates unnece
 
 #### The solution
 This bundle will significantly speed up the creation of forms inside your Symfony application. With the provided PHP 8 
-attributes you can quickly build forms DTO and you won't have to maintain two different classes anymore.
+attributes you can quickly build forms by decorating your DTO and you won't have to maintain two different classes anymore.
 
 ## Installation
 You can install the package via Composer:
