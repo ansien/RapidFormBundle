@@ -1,11 +1,11 @@
 # RapidFormBundle - Create Symfony forms at record speed using PHP 8 attributes!
 
-[comment]: <> (![GitHub Workflow Status &#40;branch&#41;]&#40;https://img.shields.io/github/workflow/status/ansien/rapid-form-bundle/Tests/master?label=Tests&logo=Tests&#41;)
+[comment]: <> (![GitHub Workflow Status &#40;branch&#41;]&#40;https://img.shields.io/github/workflow/status/ansien/RapidFormBundle/Tests/master?label=Tests&logo=Tests&#41;)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ansien/rapid-form-bundle.svg)](https://packagist.org/packages/ansien/rapid-form-bundle)
 [![Total Downloads](https://img.shields.io/packagist/dt/ansien/rapid-form-bundle.svg)](https://packagist.org/packages/ansien/rapid-form-bundle)
-![GitHub](https://img.shields.io/github/license/ansien/rapid-form-bundle)
+![GitHub](https://img.shields.io/github/license/ansien/RapidFormBundle)
 
-![Example](https://raw.githubusercontent.com/ansien/rapid-form-bundle/master/.github/readme_example.png)
+![Example](https://raw.githubusercontent.com/ansien/RapidFormBundle/master/.github/readme_example.png)
 
 This goal of this bundle is to make it possible to build Symfony forms using [PHP 8 attributes](https://stitcher.io/blog/attributes-in-php-8) on your [DTO](https://blog.martinhujer.cz/symfony-forms-with-request-objects/).
 
@@ -103,7 +103,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Supporters
-[![Stargazers repo roster for @ansien/rapid-form-bundle](https://reporoster.com/stars/ansien/rapid-form-bundle)](https://github.com/ansien/rapid-form-bundle/stargazers)
+[![Stargazers repo roster for @ansien/RapidFormBundle](https://reporoster.com/stars/ansien/RapidFormBundle)](https://github.com/ansien/RapidFormBundle/stargazers)
 
 ## Credits
 - [Andries](https://github.com/ansien)
