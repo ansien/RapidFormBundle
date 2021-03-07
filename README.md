@@ -62,7 +62,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Ansien\RapidFormBundle\Form\AttributeFormBuilderInterface;
+use Ansien\RapidFormBundle\Form\RapidFormBuilderInterface;
 use App\Form\ExampleForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,9 +71,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExampleController extends AbstractController
 {
-    private AttributeFormBuilderInterface $formBuilder;
+    private RapidFormBuilderInterface $formBuilder;
 
-    public function __construct(AttributeFormBuilderInterface $formBuilder) {
+    public function __construct(RapidFormBuilderInterface $formBuilder) {
         $this->formBuilder = $formBuilder;
     }
 

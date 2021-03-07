@@ -7,7 +7,7 @@
     <services>
         <defaults public="false" autoconfigure="true" autowire="true"/>
         <service id="Ansien\RapidFormBundle\Form\AttributeFormBuilderInterface"
-                 class="Ansien\RapidFormBundle\Form\AttributeFormBuilder"
+                 class="Ansien\RapidFormBundle\Form\RapidFormBuilder"
                  public="true">
             <argument type="service" id="form.factory"/>
         </service>

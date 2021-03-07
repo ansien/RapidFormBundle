@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ansien\RapidFormBundle\Tests\Form;
 
-use Ansien\RapidFormBundle\Form\AttributeFormBuilder;
+use Ansien\RapidFormBundle\Form\RapidFormBuilder;
 use Ansien\RapidFormBundle\Tests\TestClasses\FormAttributesForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\InvalidForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\TestForm;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class AttributeFormBuilderTest extends TypeTestCase
+class RapidFormBuilderTest extends TypeTestCase
 {
     public function testCanInitialize(): void
     {
@@ -34,7 +34,7 @@ class AttributeFormBuilderTest extends TypeTestCase
             ['EUR', 'USD'],
         );
 
-        $formBuilder = new AttributeFormBuilder($this->factory);
+        $formBuilder = new RapidFormBuilder($this->factory);
         $form = $formBuilder->create($data);
 
         $this->assertInstanceOf(Form::class, $form);
@@ -44,7 +44,7 @@ class AttributeFormBuilderTest extends TypeTestCase
     {
         $data = new InvalidForm();
 
-        $formBuilder = new AttributeFormBuilder($this->factory);
+        $formBuilder = new RapidFormBuilder($this->factory);
 
         try {
             $formBuilder->create($data);
@@ -57,7 +57,7 @@ class AttributeFormBuilderTest extends TypeTestCase
     {
         $data = new FormAttributesForm();
 
-        $formBuilder = new AttributeFormBuilder($this->factory);
+        $formBuilder = new RapidFormBuilder($this->factory);
         $form = $formBuilder->create($data);
 
         $this->assertEquals('test', $form->getConfig()->getAction());
@@ -74,7 +74,7 @@ class AttributeFormBuilderTest extends TypeTestCase
             ['EUR', 'USD'],
         );
 
-        $formBuilder = new AttributeFormBuilder($this->factory);
+        $formBuilder = new RapidFormBuilder($this->factory);
         $form = $formBuilder->create($data);
 
         $this->assertEquals(['EUR', 'USD'], $form->get('currency')->getConfig()->getOption('choices'));

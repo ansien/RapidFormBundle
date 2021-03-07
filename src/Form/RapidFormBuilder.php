@@ -11,7 +11,7 @@ use ReflectionClass;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class AttributeFormBuilder implements AttributeFormBuilderInterface
+class RapidFormBuilder implements RapidFormBuilderInterface
 {
     private FormFactoryInterface $formFactory;
 
@@ -34,7 +34,7 @@ class AttributeFormBuilder implements AttributeFormBuilderInterface
 
         return $this->formFactory->createNamed(
             $name,
-            AbstractAttributeType::class,
+            AbstractRapidFormType::class,
             $data,
             $options
         );

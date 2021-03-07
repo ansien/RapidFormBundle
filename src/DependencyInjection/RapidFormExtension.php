@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-class AttributeFormExtension extends Extension
+class RapidFormExtension extends Extension
 {
     /**
      * @throws Exception
