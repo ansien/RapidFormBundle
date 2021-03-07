@@ -7,7 +7,7 @@
 
 ![Example](https://raw.githubusercontent.com/ansien/RapidFormBundle/master/.github/readme_example.png)
 
-This goal of this bundle is to make it possible to build Symfony forms using [PHP 8 attributes](https://stitcher.io/blog/attributes-in-php-8) on your [DTO](https://blog.martinhujer.cz/symfony-forms-with-request-objects/).
+The goal of this bundle is to make it possible to build Symfony forms using [PHP 8 attributes](https://stitcher.io/blog/attributes-in-php-8) on your [DTO](https://blog.martinhujer.cz/symfony-forms-with-request-objects/).
 
 #### The problem
 Making forms in Symfony is fairly simple. But once you start using DTO's there will always be two classes you'll have to maintain: 
