@@ -73,7 +73,8 @@ class ExampleController extends AbstractController
 {
     private RapidFormBuilderInterface $formBuilder;
 
-    public function __construct(RapidFormBuilderInterface $formBuilder) {
+    public function __construct(RapidFormBuilderInterface $formBuilder) 
+    {
         $this->formBuilder = $formBuilder;
     }
 
