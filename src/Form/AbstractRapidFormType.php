@@ -16,16 +16,16 @@ class AbstractRapidFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $annotations = $this->resolveAnnotations($options['data_class']);
+        $attributes = $this->resolveAttributes($options['data_class']);
 
-        $this->applyPropertyAnnotations($annotations['properties'], $builder);
-        $this->applyClassAnnotations($annotations['class'], $builder);
+        $this->applyPropertyAttributes($attributes['properties'], $builder);
+        $this->applyClassAttributes($attributes['class'], $builder);
     }
 
     /**
      * @param <string, ReflectionClass>[] $properties
      */
-    protected function applyPropertyAnnotations(?array $properties, FormBuilderInterface $builder): void
+    protected function applyPropertyAttributes(?array $properties, FormBuilderInterface $builder): void
     {
         foreach ($properties ?? [] as $fieldName => $propertyAnnotations) {
             foreach ($propertyAnnotations as $propertyAnnotation) {
@@ -38,7 +38,7 @@ class AbstractRapidFormType extends AbstractType
         }
     }
 
-    protected function applyClassAnnotations(Form $formAttribute, FormBuilderInterface $builder): void
+    protected function applyClassAttributes(Form $formAttribute, FormBuilderInterface $builder): void
     {
         if ($action = $formAttribute->action) {
             $builder->setAction($action);
@@ -101,23 +101,23 @@ class AbstractRapidFormType extends AbstractType
         return $transformedOptions;
     }
 
-    private function resolveAnnotations(string $formClass): array
+    private function resolveAttributes(string $formClass): array
     {
         $reflectionClass = new ReflectionClass($formClass);
 
-        $propertyAnnotations = [];
+        $propertyAttributes = [];
         foreach ($reflectionClass->getProperties() as $property) {
             $propertyName = $property->getName();
             $attributes = $property->getAttributes(FormField::class);
 
             foreach ($attributes as $attribute) {
-                $propertyAnnotations[$propertyName][] = $attribute->newInstance();
+                $propertyAttributes[$propertyName][] = $attribute->newInstance();
             }
         }
 
         return [
             'class' => $reflectionClass->getAttributes(Form::class)[0]->newInstance(),
-            'properties' => $propertyAnnotations,
+            'properties' => $propertyAttributes,
         ];
     }
 }
