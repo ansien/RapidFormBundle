@@ -2,6 +2,9 @@
 
 All notable changes to `rapid-form-bundle` will be documented in this file
 
+## 1.0.6 - 2020-03-09
+- Fixed bug in options callback transformer
+
 ## 1.0.5 - 2020-03-07
 - Fixed mistake in services.xml
 

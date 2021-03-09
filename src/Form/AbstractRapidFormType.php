@@ -84,7 +84,7 @@ class AbstractRapidFormType extends AbstractType
     {
         $transformedOptions = $options;
         foreach ($options as $optionKey => $option) {
-            if (!is_array($option)) {
+            if (!is_array($option) || count($option) !== 2 || !isset($option[0])) {
                 continue;
             }
 
