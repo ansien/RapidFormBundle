@@ -99,8 +99,6 @@ class AbstractRapidFormType extends AbstractType
 
         // Handle RepeatedType
         if ($type === RepeatedType::class) {
-            $entryOptions['data_class'] = $formField->options['type'];
-
             $nestedOptions = array_merge($options, [
                 'type' => AbstractRapidFormType::class,
             ]);
