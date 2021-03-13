@@ -9,6 +9,7 @@ use Ansien\RapidFormBundle\Tests\TestClasses\CollectionForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\FormAttributesForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\InvalidForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\NestedForm;
+use Ansien\RapidFormBundle\Tests\TestClasses\RepeatedForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\TestForm;
 use Closure;
 use InvalidArgumentException;
@@ -103,5 +104,16 @@ class RapidFormBuilderTest extends TypeTestCase
 
         self::assertInstanceOf(Form::class, $form->get('items')->all()[0]->get('name'));
         self::assertEquals('0', $form->get('items')->all()[0]->get('name')->getData());
+    }
+
+    public function testRepeatedForm(): void
+    {
+        $data = new RepeatedForm();
+
+        $formBuilder = new RapidFormBuilder($this->factory);
+        $form = $formBuilder->create($data);
+
+        self::assertInstanceOf(Form::class, $form->get('repeated')->get('second'));
+        self::assertEquals('Label 2', $form->get('repeated')->get('second')->getConfig()->getOption('label'));
     }
 }

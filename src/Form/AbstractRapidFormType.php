@@ -9,6 +9,7 @@ use Ansien\RapidFormBundle\Attribute\FormField;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -86,12 +87,25 @@ class AbstractRapidFormType extends AbstractType
         if ($type === CollectionType::class) {
             $entryOptions['data_class'] = $formField->options['entry_type'];
 
-            $collectionOptions = array_merge($options, [
+            $nestedOptions = array_merge($options, [
                 'entry_type' => AbstractRapidFormType::class,
                 'entry_options' => $entryOptions,
             ]);
 
-            $builder->add($fieldName, CollectionType::class, $collectionOptions);
+            $builder->add($fieldName, CollectionType::class, $nestedOptions);
+
+            return;
+        }
+
+        // Handle RepeatedType
+        if ($type === RepeatedType::class) {
+            $entryOptions['data_class'] = $formField->options['type'];
+
+            $nestedOptions = array_merge($options, [
+                'type' => AbstractRapidFormType::class,
+            ]);
+
+            $builder->add($fieldName, RepeatedType::class, $nestedOptions);
 
             return;
         }
