@@ -4,7 +4,7 @@ All notable changes to `rapid-form-bundle` will be documented in this file
 
 ## 1.1.0 - 2020-03-13
 - Added support for collection types
-- Added support for embeddable (nested) forms.
+- Added support for embeddable (nested) forms
 
 ## 1.0.6 - 2020-03-09
 - Fixed bug in options callback transformer
@@ -25,7 +25,7 @@ All notable changes to `rapid-form-bundle` will be documented in this file
 - Improved tests and made builder use interface.
 
 ## 1.0.1 - 2020-03-06
-- Minor improvements to attributes and overall code.
+- Minor improvements to attributes and overall code
 
 ## 1.0.0 - 2020-03-06
 - Initial release
