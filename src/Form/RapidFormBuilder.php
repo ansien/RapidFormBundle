@@ -13,11 +13,8 @@ use Symfony\Component\Form\FormInterface;
 
 class RapidFormBuilder implements RapidFormBuilderInterface
 {
-    private FormFactoryInterface $formFactory;
-
-    public function __construct(FormFactoryInterface $formFactory)
+    public function __construct(private FormFactoryInterface $formFactory)
     {
-        $this->formFactory = $formFactory;
     }
 
     public function create(object $data, array $options = [], ?string $name = null): FormInterface

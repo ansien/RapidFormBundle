@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Ansien\RapidFormBundle\Tests\Form;
 
 use Ansien\RapidFormBundle\Form\RapidFormBuilder;
+use Ansien\RapidFormBundle\Tests\TestClasses\CollectionForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\FormAttributesForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\InvalidForm;
+use Ansien\RapidFormBundle\Tests\TestClasses\NestedForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\TestForm;
 use Closure;
 use InvalidArgumentException;
@@ -79,5 +81,27 @@ class RapidFormBuilderTest extends TypeTestCase
 
         $this->assertEquals(['EUR', 'USD'], $form->get('currency')->getConfig()->getOption('choices'));
         $this->assertInstanceOf(Closure::class, $form->get('currency')->getConfig()->getOption('choice_label'));
+    }
+
+    public function testNestedForm(): void
+    {
+        $data = new NestedForm();
+
+        $formBuilder = new RapidFormBuilder($this->factory);
+        $form = $formBuilder->create($data);
+
+        self::assertInstanceOf(Form::class, $form->get('childForm')->get('name'));
+        self::assertEquals('12345', $form->get('childForm')->get('name')->getData());
+    }
+
+    public function testCollectionForm(): void
+    {
+        $data = new CollectionForm();
+
+        $formBuilder = new RapidFormBuilder($this->factory);
+        $form = $formBuilder->create($data);
+
+        self::assertInstanceOf(Form::class, $form->get('items')->all()[0]->get('name'));
+        self::assertEquals('0', $form->get('items')->all()[0]->get('name')->getData());
     }
 }

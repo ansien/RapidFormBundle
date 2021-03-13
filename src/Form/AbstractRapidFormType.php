@@ -6,17 +6,22 @@ namespace Ansien\RapidFormBundle\Form;
 
 use Ansien\RapidFormBundle\Attribute\Form;
 use Ansien\RapidFormBundle\Attribute\FormField;
-use Ansien\RapidFormBundle\Util\NamingUtils;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 class AbstractRapidFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $attributes = $this->resolveAttributes($options['data_class']);
+        $attributes = $this->resolveAttributes($options);
+
+        if ($attributes === null) {
+            return;
+        }
 
         $this->applyPropertyAttributes($attributes['properties'], $builder);
         $this->applyClassAttributes($attributes['class'], $builder);
@@ -27,11 +32,11 @@ class AbstractRapidFormType extends AbstractType
      */
     protected function applyPropertyAttributes(?array $properties, FormBuilderInterface $builder): void
     {
-        foreach ($properties ?? [] as $fieldName => $propertyAnnotations) {
-            foreach ($propertyAnnotations as $propertyAnnotation) {
-                switch (get_class($propertyAnnotation)) {
+        foreach ($properties ?? [] as $fieldName => $propertyData) {
+            foreach ($propertyData['attributes'] as $attribute) {
+                switch ($attribute::class) {
                     case FormField::class:
-                        $this->addField($fieldName, $propertyAnnotation, $builder);
+                        $this->addField($fieldName, $attribute, $builder);
                         break;
                 }
             }
@@ -61,26 +66,44 @@ class AbstractRapidFormType extends AbstractType
         }
     }
 
-    protected function addField(string $fieldName, FormField $fieldAttribute, FormBuilderInterface $builder): void
+    protected function addField(string $fieldName, FormField $formField, FormBuilderInterface $builder): void
     {
-        $options = $this->transformOptions($builder->getData(), $fieldAttribute->options);
+        $options = $this->transformOptions($builder->getData(), $formField->options);
 
-        if (!isset($options['label'])) {
-            $options['label'] = sprintf(
-                '%s.%s',
-                NamingUtils::stringToSnake($builder->getName()),
-                NamingUtils::stringToSnake($fieldName),
-            );
+        $type = $formField->type;
+        $typeReflectionClass = new ReflectionClass($type);
+
+        // Handle embeddable types
+        if (!$typeReflectionClass->implementsInterface(FormTypeInterface::class) && !empty($typeReflectionClass->getAttributes(Form::class))) {
+            $builder->add($fieldName, AbstractRapidFormType::class, [
+                'data_class' => $type,
+            ]);
+
+            return;
+        }
+
+        // Handle CollectionType
+        if ($type === CollectionType::class) {
+            $entryOptions['data_class'] = $formField->options['entry_type'];
+
+            $collectionOptions = array_merge($options, [
+                'entry_type' => AbstractRapidFormType::class,
+                'entry_options' => $entryOptions,
+            ]);
+
+            $builder->add($fieldName, CollectionType::class, $collectionOptions);
+
+            return;
         }
 
         $builder->add(
             $fieldName,
-            $fieldAttribute->type,
-            $options
+            $formField->type,
+            $options,
         );
     }
 
-    protected function transformOptions(object $dataClass, array $options): array
+    protected function transformOptions(mixed $dataClass, array $options): array
     {
         $transformedOptions = $options;
         foreach ($options as $optionKey => $option) {
@@ -101,17 +124,27 @@ class AbstractRapidFormType extends AbstractType
         return $transformedOptions;
     }
 
-    private function resolveAttributes(string $formClass): array
+    private function resolveAttributes(array $options): ?array
     {
-        $reflectionClass = new ReflectionClass($formClass);
+        if (isset($options['data_class'])) {
+            $entryType = $options['data_class'];
+        } elseif (isset($options['entry_options']['entry_type'])) {
+            $entryType = $options['entry_options']['entry_type'];
+        } elseif (isset($options['entry_type'])) {
+            $entryType = $options['entry_type'];
+        } else {
+            return null;
+        }
+
+        $reflectionClass = new ReflectionClass($entryType);
 
         $propertyAttributes = [];
         foreach ($reflectionClass->getProperties() as $property) {
             $propertyName = $property->getName();
-            $attributes = $property->getAttributes(FormField::class);
+            $attributes = $property->getAttributes();
 
             foreach ($attributes as $attribute) {
-                $propertyAttributes[$propertyName][] = $attribute->newInstance();
+                $propertyAttributes[$propertyName]['attributes'][] = $attribute->newInstance();
             }
         }
 
