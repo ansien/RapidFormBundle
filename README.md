@@ -71,11 +71,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExampleController extends AbstractController
 {
-    private RapidFormBuilderInterface $formBuilder;
-
-    public function __construct(RapidFormBuilderInterface $formBuilder) 
+    public function __construct(private RapidFormBuilderInterface $formBuilder) 
     {
-        $this->formBuilder = $formBuilder;
     }
 
     #[Route('/example', methods: ['GET', 'POST'])]
