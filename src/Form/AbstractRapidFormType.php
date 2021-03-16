@@ -34,11 +34,11 @@ class AbstractRapidFormType extends AbstractType
      */
     protected function applyPropertyAttributes(?array $properties, FormBuilderInterface $builder): void
     {
-        foreach ($properties ?? [] as $fieldName => $propertyData) {
-            foreach ($propertyData['attributes'] as $attribute) {
+        foreach ($properties ?? [] as $propertyName => $propertyData) {
+            foreach ($propertyData['attributes'] ?? [] as $attribute) {
                 switch ($attribute::class) {
                     case FormField::class:
-                        $this->addField($fieldName, $attribute, $builder);
+                        $this->addField($propertyName, $attribute, $propertyData['data'], $builder);
                         break;
                 }
             }
@@ -68,9 +68,9 @@ class AbstractRapidFormType extends AbstractType
         }
     }
 
-    protected function addField(string $fieldName, FormField $formField, FormBuilderInterface $builder): void
+    protected function addField(string $fieldName, FormField $formField, mixed $formData, FormBuilderInterface $builder): void
     {
-        $options = $this->transformOptions($builder->getData(), $formField->options);
+        $options = $this->transformOptions($formData, $formField->options);
 
         $type = $formField->type;
         $typeReflectionClass = new ReflectionClass($type);
@@ -104,6 +104,8 @@ class AbstractRapidFormType extends AbstractType
 
         // Handle RepeatedType
         if ($type === RepeatedType::class) {
+            $entryOptions['data_class'] = $formField->options['type'];
+
             $nestedOptions = array_merge($options, [
                 'type' => AbstractRapidFormType::class,
             ]);
@@ -120,9 +122,10 @@ class AbstractRapidFormType extends AbstractType
         );
     }
 
-    protected function transformOptions(mixed $dataClass, array $options): array
+    protected function transformOptions(mixed $formData, array $options): array
     {
         $transformedOptions = $options;
+
         foreach ($options as $optionKey => $option) {
             if (!is_array($option) || count($option) !== 2 || !isset($option[0])) {
                 continue;
@@ -130,11 +133,11 @@ class AbstractRapidFormType extends AbstractType
 
             if ($option[0] === CallbackType::VALUE) {
                 $valueKey = $option[1];
-                $transformedOptions[$optionKey] = $dataClass->$valueKey;
+                $transformedOptions[$optionKey] = $formData->$valueKey;
             }
 
             if ($option[0] === CallbackType::FUNCTION) {
-                $transformedOptions[$optionKey] = call_user_func([$dataClass, $option[1]]);
+                $transformedOptions[$optionKey] = call_user_func([$formData, $option[1]]);
             }
         }
 
@@ -163,6 +166,14 @@ class AbstractRapidFormType extends AbstractType
             foreach ($attributes as $attribute) {
                 $propertyAttributes[$propertyName]['attributes'][] = $attribute->newInstance();
             }
+
+            if (isset($options['data'])) {
+                $data = $options['data'];
+            } else {
+                $data = new $entryType();
+            }
+
+            $propertyAttributes[$propertyName]['data'] = $data;
         }
 
         return [

@@ -2,6 +2,9 @@
 
 All notable changes to `rapid-form-bundle` will be documented in this file
 
+## 1.1.2 - 2020-03-16
+- Fixed CollectionType bugs and validation
+
 ## 1.1.1 - 2020-03-13
 - Added support for RepeatedType
 
