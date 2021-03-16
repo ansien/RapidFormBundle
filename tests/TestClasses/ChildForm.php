@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class ChildForm
 {
     #[FormField(TextType::class)]
-    public string $name;
+    public ?string $name;
 
     #[FormField(TextareaType::class)]
     public ?string $description = null;
@@ -25,7 +25,7 @@ class ChildForm
     ])]
     public ?array $nestedItems = null;
 
-    public function __construct(string $name)
+    public function __construct(?string $name = null)
     {
         $this->name = $name;
 
