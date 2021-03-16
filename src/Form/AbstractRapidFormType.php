@@ -6,6 +6,7 @@ namespace Ansien\RapidFormBundle\Form;
 
 use Ansien\RapidFormBundle\Attribute\Form;
 use Ansien\RapidFormBundle\Attribute\FormField;
+use BadMethodCallException;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -85,6 +86,10 @@ class AbstractRapidFormType extends AbstractType
 
         // Handle CollectionType
         if ($type === CollectionType::class) {
+            if (!isset($options['entry_type'])) {
+                throw new BadMethodCallException('"entry_type" must be configured for CollectionType to function properly.');
+            }
+
             $entryOptions['data_class'] = $formField->options['entry_type'];
 
             $nestedOptions = array_merge($options, [
