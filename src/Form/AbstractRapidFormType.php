@@ -10,7 +10,6 @@ use BadMethodCallException;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -98,19 +97,6 @@ class AbstractRapidFormType extends AbstractType
             ]);
 
             $builder->add($fieldName, CollectionType::class, $nestedOptions);
-
-            return;
-        }
-
-        // Handle RepeatedType
-        if ($type === RepeatedType::class) {
-            $entryOptions['data_class'] = $formField->options['type'];
-
-            $nestedOptions = array_merge($options, [
-                'type' => AbstractRapidFormType::class,
-            ]);
-
-            $builder->add($fieldName, RepeatedType::class, $nestedOptions);
 
             return;
         }

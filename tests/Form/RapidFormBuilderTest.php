@@ -113,7 +113,7 @@ class RapidFormBuilderTest extends TypeTestCase
         $formBuilder = new RapidFormBuilder($this->factory);
         $form = $formBuilder->create($data);
 
-        self::assertInstanceOf(Form::class, $form->get('repeated')->get('second'));
-        self::assertEquals('Label 2', $form->get('repeated')->get('second')->getConfig()->getOption('label'));
+        self::assertInstanceOf(Form::class, $form->get('password')->get('second'));
+        self::assertEquals('Label 2', $form->get('password')->get('second')->getConfig()->getOption('label'));
     }
 }
