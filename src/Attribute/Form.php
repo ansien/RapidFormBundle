@@ -15,6 +15,7 @@ class Form
         public ?string $submit = null,
         public ?bool $disabled = null,
         public ?array $attributes = null,
+        public ?array $eventSubscribers = null,
     ) {
     }
 }

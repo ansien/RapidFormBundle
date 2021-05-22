@@ -6,11 +6,14 @@ namespace Ansien\RapidFormBundle\Tests\Form;
 
 use Ansien\RapidFormBundle\Form\RapidFormBuilder;
 use Ansien\RapidFormBundle\Tests\TestClasses\CollectionForm;
+use Ansien\RapidFormBundle\Tests\TestClasses\EventSubscriberForm;
+use Ansien\RapidFormBundle\Tests\TestClasses\EventSubscriberInvalidForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\FormAttributesForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\InvalidForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\NestedForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\RepeatedForm;
 use Ansien\RapidFormBundle\Tests\TestClasses\TestForm;
+use BadMethodCallException;
 use Closure;
 use InvalidArgumentException;
 use Symfony\Component\Form\Form;
@@ -115,5 +118,25 @@ class RapidFormBuilderTest extends TypeTestCase
 
         self::assertInstanceOf(Form::class, $form->get('password')->get('second'));
         self::assertEquals('Label 2', $form->get('password')->get('second')->getConfig()->getOption('label'));
+    }
+
+    public function testEventSubscriber(): void
+    {
+        $data = new EventSubscriberForm();
+
+        $formBuilder = new RapidFormBuilder($this->factory);
+        $form = $formBuilder->create($data);
+
+        self::assertTrue($form->has('test'));
+    }
+
+    public function testInvalidEventSubscriber(): void
+    {
+        self::expectException(BadMethodCallException::class);
+
+        $data = new EventSubscriberInvalidForm();
+
+        $formBuilder = new RapidFormBuilder($this->factory);
+        $form = $formBuilder->create($data);
     }
 }

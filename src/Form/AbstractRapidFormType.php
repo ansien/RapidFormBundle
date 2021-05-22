@@ -8,6 +8,7 @@ use Ansien\RapidFormBundle\Attribute\Form;
 use Ansien\RapidFormBundle\Attribute\FormField;
 use BadMethodCallException;
 use ReflectionClass;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,7 +20,6 @@ class AbstractRapidFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $attributes = $this->resolveAttributes($options);
-
         if ($attributes === null) {
             return;
         }
@@ -60,6 +60,12 @@ class AbstractRapidFormType extends AbstractType
 
         if ($attributes = $formAttribute->attributes) {
             $builder->setAttributes($attributes);
+        }
+
+        if ($eventSubscribers = $formAttribute->eventSubscribers) {
+            foreach ($eventSubscribers as $eventSubscriber) {
+                $this->addEventSubscriber($eventSubscriber, $builder);
+            }
         }
 
         if ($submit = $formAttribute->submit) {
@@ -106,6 +112,16 @@ class AbstractRapidFormType extends AbstractType
             $formField->type,
             $options,
         );
+    }
+
+    protected function addEventSubscriber(string $eventSubscriberClass, FormBuilderInterface $builder): void
+    {
+        if (!class_exists($eventSubscriberClass) ||
+            !in_array(EventSubscriberInterface::class, class_implements($eventSubscriberClass))) {
+            throw new BadMethodCallException($eventSubscriberClass . ' is not a valid EventSubscriberClass');
+        }
+
+        $builder->addEventSubscriber(new $eventSubscriberClass());
     }
 
     protected function transformOptions(mixed $formData, array $options): array
