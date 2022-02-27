@@ -1,6 +1,7 @@
 {
     "name": "ansien/rapid-form-bundle",
     "description": "A bundle that will help you quickly create forms for your Symfony application",
+    "license": "MIT",
     "keywords": [
         "ansien",
         "rapid-form-bundle",
@@ -8,7 +9,6 @@
         "bundle",
         "form"
     ],
-    "version": "1.1.4",
     "type": "symfony-bundle",
     "require": {
         "php": ">=8.0",
